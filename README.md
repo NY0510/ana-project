@@ -2,6 +2,11 @@
 
 ## Summary
 
+### 구성원
+
+-   [10401 김가온 (NY0510)](https://github.com/NY0510/)
+-   [10410 설지원 (MisileLab)](https://github.com/MisileLab)
+
 ### 프로젝트 이름
 
 Socket Talk
