@@ -7,8 +7,10 @@ const socketIoSession = require("express-socket.io-session");
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
+let indexes = [];
 
 const socketIO = require("socket.io");
+const { use } = require("./routes/index");
 const io = socketIO(server);
 
 const port = 3000 || process.env.PORT;
@@ -33,7 +35,7 @@ io.use(socketIoSession(session), { autoSave: true });
 // io.use(sharedsession(session));
 io.on("connection", socket => {
 	socket.on("message", data => {
-		let username = "testuser";
+		const username = 'asdasdadsdas'
 		const { message } = data;
 		socket.broadcast.emit("message", { message, username });
 	});
