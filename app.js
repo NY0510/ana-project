@@ -33,8 +33,7 @@ io.use(socketIoSession(session), { autoSave: true });
 // io.use(sharedsession(session));
 io.on("connection", socket => {
 	socket.on("message", data => {
-		let username = socket.handshake.session.user.username;
-		console.log(username);
+		let username = "testuser";
 		const { message } = data;
 		socket.broadcast.emit("message", { message, username });
 	});
