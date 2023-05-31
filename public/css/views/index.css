@@ -1,0 +1,108 @@
+#app {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 10px auto auto auto;
+	height: 100vh;
+
+	max-width: 600px;
+}
+
+.inputBox {
+	position: fixed;
+	bottom: 10px;
+	background-color: var(--secondaryBgColor);
+	border-radius: 6px;
+	overflow: hidden;
+	display: flex;
+	height: 2.25rem;
+	width: 550px;
+
+	/* left: 1rem;
+right: 1rem; */
+}
+
+.submitMessageForm {
+	display: flex;
+	width: 100%;
+}
+
+.submitMessageForm > *:not(.line) {
+	color: #fff;
+	background-color: var(--secondaryBgColor);
+	padding: 0 0.5rem;
+}
+
+#messageInput {
+	border: none;
+	width: 100%;
+}
+
+#messageInput::placeholder {
+	font-size: 0.9rem;
+	font-weight: 200;
+}
+
+#sendButton {
+	cursor: pointer;
+	border: none;
+	width: 2.5rem;
+	color: #d9d9fd;
+
+	transition: background-color 120ms;
+}
+
+#sendButton:hover,
+#sendButton:active {
+	background-color: var(--secondaryAccentColor);
+}
+
+#chatlist {
+	width: 100%;
+	overflow-y: scroll;
+	height: calc(100vh - 2.25rem - 2rem);
+	text-align: center;
+}
+
+/* body .cursor {
+	pointer-events: none;
+}
+body .cursor__ball {
+	position: fixed;
+	top: 0;
+	left: 0;
+	mix-blend-mode: difference;
+	z-index: 1000;
+	opacity: 0;
+}
+body .cursor__ball circle,
+.cursor__ball rect {
+	fill: var(--primaryCursorColor);
+}
+rect.invert {
+	fill: var(--primaryBgColor) !important;
+	z-index: 1002;
+}
+.cursor_svg_rect {
+	width: 30px;
+	height: 30px;
+}
+
+.cursor__glow {
+	filter: blur(20px);
+	mix-blend-mode: normal;
+}
+.cursor_svg {
+	position: fixed;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+} */
+.message {
+	margin: 5px;
+	border-radius: 6px;
+	padding: 5px;
+}
+.message:hover {
+	background-color: var(--secondaryAccentColor);
+}

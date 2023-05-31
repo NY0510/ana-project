@@ -5,13 +5,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/root.css">
+    <link rel="stylesheet" href="/css/views/index.css">
+    <script src="//kit.fontawesome.com/bc99dafff1.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <title>Socket Talk</title>
 </head>
 
 <body>
-    <h1>Hell world</h1>
+    <div id="app" class="noselect">
+        <div id="chatlist">
+
+        </div>
+        <div class="inputBox">
+            <form class="submitMessageForm">
+                <input type="text" id="messageInput" placeholder="메세지 입력" autofocus autocomplete="off">
+                <div class="line"></div>
+                <button id="sendButton"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
 </body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/main.js"></script>
 
 </html>
