@@ -9,7 +9,7 @@ const io = socketIO(server);
 
 const getRamdomUserName = require("./utils/username");
 
-const port = 3000 || process.env.PORT;
+const port = process.env.PORT | 3000;
 global.__rootPath = path.resolve(process.cwd());
 
 app.use(express.static(path.join(__dirname, "public")));
