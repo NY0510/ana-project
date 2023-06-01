@@ -114,7 +114,7 @@ submitMessageForm.addEventListener("submit", e => {
 	e.preventDefault();
 
 	let message = document.querySelector("#messageInput").value;
-	if (message.length <= 0) return;
+	if (message.trim().length <= 0) return (submitMessageForm.querySelector("input").value = "");
 
 	appendChatMessage(message, userdata.username);
 	socket.emit("message", message);
