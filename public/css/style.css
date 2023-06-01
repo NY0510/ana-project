@@ -66,7 +66,7 @@ body ::-webkit-scrollbar-track {
 	overflow: hidden;
 	display: flex;
 	height: 2.25rem;
-	width: 550px;
+	width: 600px;
 }
 
 #submitMessageForm {
@@ -174,4 +174,14 @@ body ::-webkit-scrollbar-track {
 	font-weight: 300;
 	padding: 0.5rem;
 	border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+	#app {
+		margin: 0 1rem;
+	}
+
+	.inputBox {
+		width: 90%;
+	}
 }
