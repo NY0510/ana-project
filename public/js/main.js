@@ -5,6 +5,41 @@ let userdata;
 const submitMessageForm = document.querySelector("#submitMessageForm");
 const chatList = document.querySelector("#chatList");
 
+function checkNotificationPromise() {
+	try {
+	  Notification.requestPermission().then();
+	} catch (e) {
+	  return false;
+	}
+  
+	return true;
+  }
+  
+
+function askNotificationPermission() {
+	// function to actually ask the permissions
+	function handlePermission(permission) {
+	  // set the button to shown or hidden, depending on what the user answers
+	  notificationBtn.style.display =
+		Notification.permission === "granted" ? "none" : "block";
+	}
+  
+	// Let's check if the browser supports notifications
+	if (!("Notification" in window)) {
+	  console.log("This browser does not support notifications.");
+	} else if (checkNotificationPromise()) {
+	  Notification.requestPermission().then((permission) => {
+		handlePermission(permission);
+	  });
+	} else {
+	  Notification.requestPermission((permission) => {
+		handlePermission(permission);
+	  });
+	}
+  }
+
+askNotificationPermission();
+
 function connect() {
 	socket.emit("connection");
 }
@@ -66,7 +101,6 @@ function createChatElement(message, username) {
 	_message.textContent = message;
 	_row2.appendChild(_message);
 	_content.appendChild(_row2);
-
 	_messageBox.appendChild(_profile);
 	_messageBox.appendChild(_content);
 
@@ -95,6 +129,7 @@ function appendChatMessage(message, username) {
 
 socket.on("message", data => {
 	console.log(data);
+	new Notification(`${data.username}`, { body: `${data.message}`, icon: `https://api.dicebear.com/6.x/identicon/svg?seed=${data.username}`})
 	appendChatMessage(data.message, data.username);
 });
 
@@ -102,11 +137,13 @@ socket.on("rename", data => (userdata = data));
 
 socket.on("userJoined", data => {
 	const notiDiv = createNotiElement(`${data.username} 이(가) 참여했습니다. [${data.userSize}명 온라인]`);
+	new Notification(`${data.username} 이(가) 참여했습니다.`, { body: `[${data.userSize}명 온라인]`, icon: `https://api.dicebear.com/6.x/identicon/svg?seed=${data.username}` });
 	chatList.appendChild(notiDiv);
 });
 
 socket.on("userLefted", data => {
 	const notiDiv = createNotiElement(`${data.username} 이(가) 퇴장했습니다. [${data.userSize}명 온라인]`);
+	new Notification(`${data.username} 이(가) 퇴장했습니다.`, { body: `[${data.userSize}명 온라인]`, icon: `https://api.dicebear.com/6.x/identicon/svg?seed=${data.username}` });
 	chatList.appendChild(notiDiv);
 });
 
