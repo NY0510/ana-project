@@ -73,6 +73,19 @@ function createChatElement(message, username) {
 	return _messageBox;
 }
 
+function createNotiElement(message) {
+	var _notiBox = document.createElement("div");
+	_notiBox.className = "notiBox";
+
+	var _content = document.createElement("span");
+	_content.className = "content";
+	_content.innerText = message;
+
+	_notiBox.appendChild(_content);
+
+	return _notiBox;
+}
+
 function appendChatMessage(message, username) {
 	const messageDiv = createChatElement(message, username);
 
@@ -80,15 +93,21 @@ function appendChatMessage(message, username) {
 	chatList.scrollTop = chatList.scrollHeight;
 }
 
-socket.on("userSizeUpdated", data => {
-	console.log(data);
-});
-
-socket.on("userJoined", data => (userdata = data));
-
 socket.on("message", data => {
 	console.log(data);
 	appendChatMessage(data.message, data.username);
+});
+
+socket.on("rename", data => (userdata = data));
+
+socket.on("userJoined", data => {
+	const notiDiv = createNotiElement(`${data.username} 이(가) 참여했습니다. [${data.userSize}명 온라인]`);
+	chatList.appendChild(notiDiv);
+});
+
+socket.on("userLefted", data => {
+	const notiDiv = createNotiElement(`${data.username} 이(가) 퇴장했습니다. [${data.userSize}명 온라인]`);
+	chatList.appendChild(notiDiv);
 });
 
 submitMessageForm.addEventListener("submit", e => {

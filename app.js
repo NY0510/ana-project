@@ -25,8 +25,8 @@ io.on("connection", async socket => {
 		++userSize;
 		addedUser = true;
 		socket.username = await getRamdomUserName();
-		socket.emit("userSizeUpdated", { userSize: userSize });
-		socket.emit("userJoined", { username: socket.username });
+		socket.emit("rename", { username: socket.username });
+		io.sockets.emit("userJoined", { username: socket.username, userSize: userSize });
 		console.log(`[User Connected] ${socket.username}`);
 	});
 
@@ -34,8 +34,8 @@ io.on("connection", async socket => {
 		if (addedUser) {
 			--userSize;
 
-			io.emit("userSizeUpdated", { userSize: userSize });
-			console.log(`[User Disconnected]`);
+			io.sockets.emit("userLefted", { username: socket.username, userSize: userSize });
+			console.log(`[User Disconnected] ${socket.username}`);
 		}
 	});
 

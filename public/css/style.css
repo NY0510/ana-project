@@ -116,15 +116,6 @@ body ::-webkit-scrollbar-track {
 	text-align: center;
 }
 
-/* .message {
-	margin: 5px;
-	border-radius: 6px;
-	padding: 5px;
-}
-.message:hover {
-	background-color: var(--secondaryAccentColor);
-} */
-
 .messageBox {
 	display: flex;
 	background-color: var(--secondaryAccentColor);
@@ -135,6 +126,7 @@ body ::-webkit-scrollbar-track {
 
 .messageBox .profile {
 	width: 50px;
+	height: 50px;
 }
 
 .messageBox .profile img {
@@ -149,6 +141,10 @@ body ::-webkit-scrollbar-track {
 	margin-left: 1rem;
 }
 
+.messageBox .row:last-child {
+	margin-top: 0.2rem;
+}
+
 .messageBox .username {
 	font-weight: 700;
 	color: #e0dfdf;
@@ -158,4 +154,21 @@ body ::-webkit-scrollbar-track {
 	font-size: 0.8rem;
 	font-weight: 400;
 	color: #bcbaba;
+}
+
+.notiBox:first-child {
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+}
+
+.notiBox:not(:first-child) {
+	margin: 2.5rem 0;
+}
+
+.notiBox .content {
+	background-color: var(--secondaryBgColor);
+	color: #bcbaba;
+	font-weight: 300;
+	padding: 0.5rem;
+	border-radius: 8px;
 }
