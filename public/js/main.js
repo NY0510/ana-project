@@ -5,40 +5,39 @@ let userdata;
 const submitMessageForm = document.querySelector("#submitMessageForm");
 const chatList = document.querySelector("#chatList");
 
+window.onload = () => {
+	askNotificationPermission();
+	connect();
+};
+
 function checkNotificationPromise() {
 	try {
-	  Notification.requestPermission().then();
+		Notification.requestPermission().then();
 	} catch (e) {
-	  return false;
+		return false;
 	}
-  
+
 	return true;
-  }
-  
+}
 
 function askNotificationPermission() {
-	// function to actually ask the permissions
 	function handlePermission(permission) {
-	  // set the button to shown or hidden, depending on what the user answers
-	  notificationBtn.style.display =
 		Notification.permission === "granted" ? "none" : "block";
 	}
-  
-	// Let's check if the browser supports notifications
-	if (!("Notification" in window)) {
-	  console.log("This browser does not support notifications.");
-	} else if (checkNotificationPromise()) {
-	  Notification.requestPermission().then((permission) => {
-		handlePermission(permission);
-	  });
-	} else {
-	  Notification.requestPermission((permission) => {
-		handlePermission(permission);
-	  });
-	}
-  }
 
-askNotificationPermission();
+	// 브라우저가 알림 지원하는지
+	if (!("Notification" in window)) {
+		console.log("This browser does not support notifications.");
+	} else if (checkNotificationPromise()) {
+		Notification.requestPermission().then(permission => {
+			handlePermission(permission);
+		});
+	} else {
+		Notification.requestPermission(permission => {
+			handlePermission(permission);
+		});
+	}
+}
 
 function connect() {
 	socket.emit("connection");
@@ -56,35 +55,35 @@ function createChatElement(message, username) {
 	});
 
 	// messageBox div
-	var _messageBox = document.createElement("div");
+	let _messageBox = document.createElement("div");
 	_messageBox.className = "messageBox";
 
 	// 프로필 이미지
-	var _profile = document.createElement("div");
+	let _profile = document.createElement("div");
 	_profile.className = "profile";
 
-	var _profileImg = document.createElement("img");
+	let _profileImg = document.createElement("img");
 	_profileImg.src = `https://api.dicebear.com/6.x/identicon/svg?seed=${username}`;
 	_profileImg.alt = `${username}의 프로필 이미지`;
 	_profile.appendChild(_profileImg);
 
 	// content div
-	var _content = document.createElement("div");
+	let _content = document.createElement("div");
 	_content.className = "content";
 
 	// 닉네임
-	var _row1 = document.createElement("div");
+	let _row1 = document.createElement("div");
 	_row1.className = "row";
-	var _username = document.createElement("span");
+	let _username = document.createElement("span");
 	_username.className = "username";
 	_username.textContent = username;
 
 	// 공백
-	var _blink = document.createElement("span");
+	let _blink = document.createElement("span");
 	_blink.textContent = " ";
 
 	// 타임스템프
-	var _timestamp = document.createElement("span");
+	let _timestamp = document.createElement("span");
 	_timestamp.className = "timestamp";
 	_timestamp.textContent = formattedDate;
 
@@ -94,9 +93,9 @@ function createChatElement(message, username) {
 	_content.appendChild(_row1);
 
 	// 메세지 내용
-	var _row2 = document.createElement("div");
+	let _row2 = document.createElement("div");
 	_row2.className = "row";
-	var _message = document.createElement("span");
+	let _message = document.createElement("span");
 	_message.className = "message";
 	_message.textContent = message;
 	_row2.appendChild(_message);
@@ -108,10 +107,10 @@ function createChatElement(message, username) {
 }
 
 function createNotiElement(message) {
-	var _notiBox = document.createElement("div");
+	let _notiBox = document.createElement("div");
 	_notiBox.className = "notiBox";
 
-	var _content = document.createElement("span");
+	let _content = document.createElement("span");
 	_content.className = "content";
 	_content.innerText = message;
 
@@ -129,7 +128,7 @@ function appendChatMessage(message, username) {
 
 socket.on("message", data => {
 	console.log(data);
-	new Notification(`${data.username}`, { body: `${data.message}`, icon: `https://api.dicebear.com/6.x/identicon/svg?seed=${data.username}`})
+	new Notification(`${data.username}`, { body: `${data.message}`, icon: `https://api.dicebear.com/6.x/identicon/svg?seed=${data.username}` });
 	appendChatMessage(data.message, data.username);
 });
 
