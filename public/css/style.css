@@ -93,6 +93,11 @@ right: 1rem; */
 	font-weight: 200;
 }
 
+#messageInput:focus {
+	border: none;
+	outline: none;
+}
+
 #sendButton {
 	cursor: pointer;
 	border: none;

@@ -1,5 +1,7 @@
 const socket = io();
 
+let userdata;
+
 const submitMessageForm = document.querySelector(".submitMessageForm");
 
 function appendChatMessage(message, username) {
@@ -19,18 +21,23 @@ function appendChatMessage(message, username) {
 	chatlist.scrollTop = chatlist.scrollHeight;
 }
 
+socket.on("userSizeUpdated", data => {
+	console.log(data);
+});
+
+socket.on("userJoined", data => (userdata = data));
+
 socket.on("message", data => {
 	appendChatMessage(data.message, data.username);
 });
 
-window.onload = () => {
-	submitMessageForm.addEventListener("submit", e => {
-		e.preventDefault();
+submitMessageForm.addEventListener("submit", e => {
+	e.preventDefault();
 
-		let message = document.querySelector("#messageInput").value;
+	let message = document.querySelector("#messageInput").value;
+	if (message.length <= 0) return;
 
-		appendChatMessage(message);
-		socket.emit("message", { message });
-		submitMessageForm.querySelector("input").value = "";
-	});
-};
+	appendChatMessage(message, userdata.username);
+	socket.emit("message", message);
+	submitMessageForm.querySelector("input").value = "";
+});
