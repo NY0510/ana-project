@@ -6,8 +6,8 @@ const submitMessageForm = document.querySelector("#submitMessageForm");
 const chatList = document.querySelector("#chatList");
 
 window.onload = () => {
-	askNotificationPermission();
 	connect();
+	askNotificationPermission();
 };
 
 function checkNotificationPromise() {
