@@ -19,17 +19,18 @@ let userSize = 0;
 io.on("connection", async socket => {
 	let addedUser = false;
 
-	if (addedUser) return;
+	socket.on("connection", async data => {
+		if (addedUser) return;
 
-	++userSize;
-	addedUser = true;
-	socket.username = await getRamdomUserName();
+		++userSize;
+		addedUser = true;
+		socket.username = await getRamdomUserName();
+		socket.emit("userSizeUpdated", { userSize: userSize });
+		socket.emit("userJoined", { username: socket.username });
+		console.log(`[User Connected] ${socket.username}`);
+	});
 
-	io.emit("userSizeUpdated", { userSize: userSize });
-	io.emit("userJoined", { username: socket.username });
-	console.log(`[User Connected] ${socket.username}`);
-
-	socket.on("disconnect", socket => {
+	socket.on("disconnect", data => {
 		if (addedUser) {
 			--userSize;
 

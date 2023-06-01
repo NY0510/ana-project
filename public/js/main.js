@@ -5,6 +5,10 @@ let userdata;
 const submitMessageForm = document.querySelector("#submitMessageForm");
 const chatList = document.querySelector("#chatList");
 
+function connect() {
+	socket.emit("connection");
+}
+
 function createChatElement(message, username) {
 	const date = new Date();
 	const formattedDate = date.toLocaleString("ko-KR", {
@@ -83,6 +87,7 @@ socket.on("userSizeUpdated", data => {
 socket.on("userJoined", data => (userdata = data));
 
 socket.on("message", data => {
+	console.log(data);
 	appendChatMessage(data.message, data.username);
 });
 
