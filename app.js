@@ -27,16 +27,14 @@ io.on("connection", async socket => {
 
 	io.emit("userSizeUpdated", { userSize: userSize });
 	io.emit("userJoined", { username: socket.username });
-
-	// socket.on("connect", async socket => {
-	// });
+	console.log(`[User Connected] ${socket.username}`);
 
 	socket.on("disconnect", socket => {
 		if (addedUser) {
 			--userSize;
 
 			io.emit("userSizeUpdated", { userSize: userSize });
-			io.emit("userLefted", { username: socket.username });
+			console.log(`[User Disconnected]`);
 		}
 	});
 
@@ -48,7 +46,7 @@ io.on("connection", async socket => {
 				message: data,
 			});
 
-			console.log(`${socket.username}: ${data.message}`);
+			console.log(`[New Message] ${socket.username}: ${data}`);
 		}
 	});
 });
