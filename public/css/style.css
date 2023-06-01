@@ -1,3 +1,53 @@
+@import url("/css/fonts.css");
+@import url("/css/colors.css");
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+		"Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+html,
+body {
+	background-color: #141414;
+	color: var(--primaryTextColor);
+	overflow-y: hidden;
+
+	/* For Firefox */
+	scrollbar-color: var(--primaryBgColor) #ffffff00;
+	scrollbar-width: 7px;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar {
+	width: 7px;
+	height: 3.5px;
+}
+html ::-webkit-scrollbar-thumb,
+body ::-webkit-scrollbar-thumb {
+	background: var(--primaryBgColor);
+	border-radius: 20px;
+}
+html ::-webkit-scrollbar-track,
+body ::-webkit-scrollbar-track {
+	background: #ffffff00;
+	border-radius: 20px;
+}
+
+.noselect {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.line {
+	width: 1.5px;
+	background-color: #2d2d2d;
+}
+
 #app {
 	display: flex;
 	flex-direction: column;
@@ -64,40 +114,6 @@ right: 1rem; */
 	text-align: center;
 }
 
-/* body .cursor {
-	pointer-events: none;
-}
-body .cursor__ball {
-	position: fixed;
-	top: 0;
-	left: 0;
-	mix-blend-mode: difference;
-	z-index: 1000;
-	opacity: 0;
-}
-body .cursor__ball circle,
-.cursor__ball rect {
-	fill: var(--primaryCursorColor);
-}
-rect.invert {
-	fill: var(--primaryBgColor) !important;
-	z-index: 1002;
-}
-.cursor_svg_rect {
-	width: 30px;
-	height: 30px;
-}
-
-.cursor__glow {
-	filter: blur(20px);
-	mix-blend-mode: normal;
-}
-.cursor_svg {
-	position: fixed;
-	border-radius: 50%;
-	width: 30px;
-	height: 30px;
-} */
 .message {
 	margin: 5px;
 	border-radius: 6px;
